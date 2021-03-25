@@ -31,6 +31,7 @@
         <p>Image URL: <input v-model="currentContact.image"></p>
         <button>Close</button>
         <button v-on:click="contactsUpdate">Update</button>
+        <button v-on:click="contactsDestroy(currentContact)">Delete</button>
       </form>
     </dialog>
   </div>
@@ -104,6 +105,16 @@ export default {
         .patch("/api/contacts/" + this.currentContact.id, this.currentContact)
         .then(response => {
           console.log(response.data);
+        })
+    },
+    contactsDestroy: function (theContact) {
+      console.log("destroying...");
+      axios
+        .delete("/api/contacts/" + theContact.id)
+        .then(response => {
+          console.log(response.data);
+          let index = this.contacts.indexOf(theContact);
+          this.contacts.splice(index, 1);
         })
     }
   }
