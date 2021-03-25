@@ -2,11 +2,13 @@
   <div class="home">
     <h1>{{ message }}</h1>
     <br>
-    <p> First Name: <input v-model="params.first_name"></p>
-    <p> Last Name: <input v-model="params.last_name"></p>
-    <p> Email: <input v-model="params.email"></p>
-    <p> Phone Number: <input v-model="params.phone_number"></p>
-    <p> Image URL: <input v-model="params.image"></p>
+    <div>
+      <p> First Name:  <input v-model="params.first_name"></p>
+      <p> Last Name:  <input v-model="params.last_name"></p>
+      <p> Email:  <input v-model="params.email"></p>
+      <p> Phone Number:  <input v-model="params.phone_number"></p>
+      <p> Image URL:  <input v-model="params.image"></p>
+    </div>
     <button v-on:click="contactsCreate">Create</button>
     <br>
     <br>
@@ -16,7 +18,7 @@
     <div v-for="contact in contacts" v-bind:key="contact.id">
       <p>{{ contact.first_name }} {{ contact.last_name }} <button v-on:click="contactsShow(contact)">More info</button></p>
       
-      <img v-bind:src="contact.image" style="width: 200px;">
+      <img v-bind:src="contact.image" alt="Image failed to load" style="width: 200px;">
       <br>
       <br>
       <br>
@@ -24,11 +26,11 @@
     </div>
     <dialog id="contact-details">
       <form method="dialog">
-        <p>First Name: <input v-model="currentContact.first_name"></p>
-        <p>Last Name: <input v-model="currentContact.last_name"></p>
-        <p>Email: <input v-model="currentContact.email"></p>
-        <p>Phone Number: <input v-model="currentContact.phone_number"></p>
-        <p>Image URL: <input v-model="currentContact.image"></p>
+        <p>First Name:<input v-model="currentContact.first_name"></p>
+        <p>Last Name:<input v-model="currentContact.last_name"></p>
+        <p>Email:<input v-model="currentContact.email"></p>
+        <p>Phone Number:<input v-model="currentContact.phone_number"></p>
+        <p>Image URL:<input v-model="currentContact.image"></p>
         <button>Close</button>
         <button v-on:click="contactsUpdate">Update</button>
         <button v-on:click="contactsDestroy(currentContact)">Delete</button>
@@ -38,20 +40,57 @@
 </template>
  
 <style>
-p {
+body {
+  background-color: rgb(250, 248, 242);
   font-weight: bold;
 }
 
 button {
   background-color: rgb(233, 221, 195);
+  transition: ease 10s;
 }
 
 dialog {
-  text-align: left;
+  text-align: end;
 }
 
 input {
+  float: center;
+  background-image: linear-gradient(to top, white 40%, rgb(221, 221, 221));
+  border: 1px solid rgb(101, 101, 101);
   width: 400px;
+  padding: 3px 4px;
+  margin-left: 8px;
+  margin-right: 100px;
+}
+
+input:hover,
+input:focus {
+  color: rgb(72, 72, 72);
+  cursor: wait;
+}
+
+body:hover,
+body:focus {
+  cursor: wait;
+}
+
+button:hover,
+button:focus {
+  cursor: pointer;
+  margin-left: 1000px;
+  margin-right: 1000px;
+  transition: ease 10s;
+}
+
+img {
+  transition: ease 10s;
+}
+
+img:hover {
+  opacity: 0;
+  margin-left: 1000px;
+  transition: ease 0.5s;
 }
 </style>
 
